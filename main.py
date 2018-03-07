@@ -79,7 +79,13 @@ with open('planet') as f:
             dir1 = str(angles[a[5]])
             dir2 = str(angles[a[2]])
             weight = str(a[6])
-            edges_str.append('\\draw (' + node1 + ') to[in=' + dir1 + ', out=' + dir2 + ', edge node={node[auto] {' + weight +'}}] (' + node2 + ');')
+            edges_str.append('\\draw ({node1}) to[in={dir1}, out={dir2}, edge node={{node[auto, inner sep=1mm] {{{weight}}}}}] ({node2});'.format(
+                node1 = node1,
+                node2 = node2,
+                dir1 = dir1,
+                dir2 = dir2,
+                weight = weight
+            ))
 
 with open('out.tex', 'w') as out:
     out.write('\\documentclass[preview, border=20pt]{standalone}\n')
